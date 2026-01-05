@@ -1,0 +1,50 @@
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+  <h1 class="text-3xl font-bold mb-4">Snake</h1>
+
+  <!-- START SCREEN -->
+  @if (state === GameState.START) {
+  <div class="text-center">
+    <p class="mb-4 text-lg">Presiona Enter para comenzar</p>
+    <button class="px-6 py-2 bg-green-500 text-black font-semibold rounded" (click)="startGame()">
+      Jugar
+    </button>
+  </div>
+  }
+
+  <!-- GAME -->
+  @if (state === GameState.COUNTDOWN || state === GameState.PLAYING) {
+  <div class="relative">
+    <p class="mt-2 text-sm text-gray-400">Velocidad: {{ speed }}ms</p>
+    <canvas
+      #gameCanvas
+      width="400"
+      height="400"
+      class="border-4 border-green-500 bg-black"
+    ></canvas>
+    @if (state === GameState.COUNTDOWN) {
+    <div
+      class="absolute inset-0 flex items-center justify-center bg-black/70 text-6xl font-bold text-green-400"
+    >
+      {{ countdown }}
+    </div>
+    }
+  </div>
+  }
+
+  <!-- GAME OVER -->
+  @if (state === GameState.GAME_OVER) {
+  <div class="text-center">
+    <p class="text-xl mb-2">Game Over</p>
+    <p class="mb-4">Puntuación: {{ score }}</p>
+    <p class="mb-4 text-sm text-gray-400">Récord: {{ highScore }}</p>
+    <button class="px-6 py-2 bg-green-500 text-black font-semibold rounded" (click)="startGame()">
+      Reintentar
+    </button>
+  </div>
+  } @if (state === GameState.PLAYING) {
+  <p class="mt-4 text-lg">
+    Puntuación: <span class="text-green-400">{{ score }}</span>
+  </p>
+  <p class="text-sm text-gray-400">Récord: {{ highScore }}</p>
+  }
+</div>
